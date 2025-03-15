@@ -4,6 +4,12 @@ const startButton = document.getElementById('startButton');
 const restartButton = document.getElementById('restartButton');
 const scoreElement = document.getElementById('score');
 
+// Mobile control buttons
+const upBtn = document.getElementById('upBtn');
+const downBtn = document.getElementById('downBtn');
+const leftBtn = document.getElementById('leftBtn');
+const rightBtn = document.getElementById('rightBtn');
+
 // Set canvas size
 canvas.width = 400;
 canvas.height = 400;
@@ -19,6 +25,11 @@ let score = 0;
 let gameLoop = null;
 let gameStarted = false;
 let isGameOver = false;
+
+// Touch handling variables
+let touchStartX = 0;
+let touchStartY = 0;
+const minSwipeDistance = 30; // Minimum distance for a swipe
 
 // Prevent arrow key scrolling globally
 window.addEventListener("keydown", function(e) {
@@ -191,7 +202,12 @@ function handleKeyPress(e) {
 
     if (!gameStarted) return;
     
-    switch(e.key) {
+    changeDirection(e.key);
+}
+
+// New function to handle direction changes
+function changeDirection(direction) {
+    switch(direction) {
         case 'ArrowUp':
             if (dy === 0) {
                 dx = 0;
@@ -219,6 +235,70 @@ function handleKeyPress(e) {
     }
 }
 
+// Touch event handlers
+function handleTouchStart(e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+}
+
+function handleTouchMove(e) {
+    if (!gameStarted) return;
+    
+    e.preventDefault();
+    
+    const touchEndX = e.touches[0].clientX;
+    const touchEndY = e.touches[0].clientY;
+    
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    
+    if (Math.abs(deltaX) > minSwipeDistance || Math.abs(deltaY) > minSwipeDistance) {
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            // Horizontal swipe
+            changeDirection(deltaX > 0 ? 'ArrowRight' : 'ArrowLeft');
+        } else {
+            // Vertical swipe
+            changeDirection(deltaY > 0 ? 'ArrowDown' : 'ArrowUp');
+        }
+        touchStartX = touchEndX;
+        touchStartY = touchEndY;
+    }
+}
+
+// Mobile button handlers
+function handleMobileButtonClick(direction) {
+    if (!gameStarted) return;
+    changeDirection(direction);
+}
+
+// Add touch event listeners
+canvas.addEventListener('touchstart', handleTouchStart, false);
+canvas.addEventListener('touchmove', handleTouchMove, false);
+
+// Add mobile button event listeners
+upBtn.addEventListener('click', () => handleMobileButtonClick('ArrowUp'));
+downBtn.addEventListener('click', () => handleMobileButtonClick('ArrowDown'));
+leftBtn.addEventListener('click', () => handleMobileButtonClick('ArrowLeft'));
+rightBtn.addEventListener('click', () => handleMobileButtonClick('ArrowRight'));
+
+// Touch events for mobile buttons to prevent double-tap zoom
+upBtn.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    handleMobileButtonClick('ArrowUp');
+});
+downBtn.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    handleMobileButtonClick('ArrowDown');
+});
+leftBtn.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    handleMobileButtonClick('ArrowLeft');
+});
+rightBtn.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    handleMobileButtonClick('ArrowRight');
+});
+
 // Game over function
 function gameOver() {
     clearInterval(gameLoop);
@@ -240,7 +320,7 @@ function startGame() {
     }
 }
 
-// Event listeners
+// Existing event listeners
 document.addEventListener('keydown', handleKeyPress);
 startButton.addEventListener('click', startGame);
 restartButton.addEventListener('click', startGame);
