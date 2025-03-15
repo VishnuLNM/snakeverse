@@ -179,6 +179,11 @@ function draw() {
 function handleKeyPress(e) {
     if (!gameStarted) return;
     
+    // Prevent default scrolling behavior for arrow keys during gameplay
+    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+        e.preventDefault();
+    }
+    
     switch(e.key) {
         case 'ArrowUp':
             if (dy === 0) {
