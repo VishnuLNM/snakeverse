@@ -1,6 +1,6 @@
 # SnakeVerse 🐍
 
-A modern implementation of the classic Snake game, built with HTML5, CSS3, and JavaScript. Play it now at [your-username.github.io/snakeverse](https://your-username.github.io/snakeverse)!
+A modern implementation of the classic Snake game, built with HTML5, CSS3, and JavaScript. Play it now at [VishnuLNM.github.io/snakeverse](https://VishnuLNM.github.io/snakeverse)!
 
 ## Features
 - 🎮 Smooth snake movement with arrow key controls
@@ -11,12 +11,12 @@ A modern implementation of the classic Snake game, built with HTML5, CSS3, and J
 - 🎨 Modern UI with beautiful animations
 
 ## Play Online
-Visit [your-username.github.io/snakeverse](https://your-username.github.io/snakeverse) to play the game online!
+Visit [VishnuLNM.github.io/snakeverse](https://VishnuLNM.github.io/snakeverse) to play the game online!
 
 ## Local Development
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/snakeverse.git
+   git clone https://github.com/VishnuLNM/snakeverse.git
    ```
 2. Navigate to the project directory:
    ```bash
