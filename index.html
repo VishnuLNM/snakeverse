@@ -10,6 +10,66 @@
         /* Add this to prevent unwanted scrolling during gameplay */
         body.game-active {
             overflow: hidden;
+            touch-action: none;
+        }
+
+        /* Mobile controls styling */
+        .mobile-controls {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+            touch-action: none;
+        }
+
+        .control-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 5px 0;
+        }
+
+        .control-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            background-color: #2E7D32;
+            color: white;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            touch-action: none;
+        }
+
+        .control-btn:active {
+            background-color: #1B5E20;
+        }
+
+        /* Show mobile controls on touch devices */
+        @media (hover: none) and (pointer: coarse) {
+            .mobile-controls {
+                display: flex;
+            }
+        }
+
+        /* Swipe indicator */
+        .swipe-indicator {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+            color: #666;
+            font-style: italic;
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .swipe-indicator {
+                display: block;
+            }
         }
     </style>
 </head>
@@ -37,8 +97,29 @@
                     </div>
                 </div>
                 <canvas id="gameCanvas" tabindex="1"></canvas>
+                <p class="swipe-indicator">You can also swipe to control the snake!</p>
+                <div class="mobile-controls">
+                    <div class="control-row">
+                        <button class="control-btn" id="upBtn">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                    </div>
+                    <div class="control-row">
+                        <button class="control-btn" id="leftBtn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="control-btn" id="rightBtn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="control-row">
+                        <button class="control-btn" id="downBtn">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
                 <div class="game-controls">
-                    <p>Use arrow keys to control the snake</p>
+                    <p>Use arrow keys or swipe to control the snake</p>
                     <button id="startButton" class="btn">Start Game</button>
                     <button id="restartButton" class="btn" style="display: none;">Restart Game</button>
                 </div>
@@ -51,12 +132,11 @@
                 <div class="instruction-card">
                     <i class="fas fa-keyboard"></i>
                     <h3>Controls</h3>
-                    <p>Use arrow keys to move the snake:</p>
+                    <p>Multiple ways to control the snake:</p>
                     <ul>
-                        <li>↑ Up</li>
-                        <li>↓ Down</li>
-                        <li>← Left</li>
-                        <li>→ Right</li>
+                        <li>Arrow keys (Desktop)</li>
+                        <li>Swipe gestures (Mobile)</li>
+                        <li>On-screen buttons (Mobile)</li>
                     </ul>
                 </div>
                 <div class="instruction-card">
