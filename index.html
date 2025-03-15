@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnakeVerse - Play the Classic Snake Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-snake"></i> SnakeVerse
+            </div>
+            <div class="nav-links">
+                <a href="#game" class="active">Play Game</a>
+                <a href="#instructions">How to Play</a>
+                <a href="#highscores">High Scores</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="game" class="game-section">
+            <div class="game-container">
+                <div class="game-header">
+                    <h1>Snake Game</h1>
+                    <div class="score-container">
+                        Score: <span id="score">0</span>
+                    </div>
+                </div>
+                <canvas id="gameCanvas"></canvas>
+                <div class="game-controls">
+                    <p>Use arrow keys to control the snake</p>
+                    <button id="startButton" class="btn">Start Game</button>
+                    <button id="restartButton" class="btn" style="display: none;">Restart Game</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="instructions" class="instructions-section">
+            <h2>How to Play</h2>
+            <div class="instructions-container">
+                <div class="instruction-card">
+                    <i class="fas fa-keyboard"></i>
+                    <h3>Controls</h3>
+                    <p>Use arrow keys to move the snake:</p>
+                    <ul>
+                        <li>↑ Up</li>
+                        <li>↓ Down</li>
+                        <li>← Left</li>
+                        <li>→ Right</li>
+                    </ul>
+                </div>
+                <div class="instruction-card">
+                    <i class="fas fa-apple-alt"></i>
+                    <h3>Objective</h3>
+                    <p>Eat the apples to grow longer and increase your score.</p>
+                    <p>Each apple is worth 10 points!</p>
+                </div>
+                <div class="instruction-card">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Game Over</h3>
+                    <p>Avoid hitting:</p>
+                    <ul>
+                        <li>The walls</li>
+                        <li>Your own tail</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 SnakeVerse. All rights reserved.</p>
+    </footer>
+
+    <script src="game.js"></script>
+</body>
+</html> 
