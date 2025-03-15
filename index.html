@@ -6,6 +6,12 @@
     <title>SnakeVerse - Play the Classic Snake Game</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Add this to prevent unwanted scrolling during gameplay */
+        body.game-active {
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -30,7 +36,7 @@
                         Score: <span id="score">0</span>
                     </div>
                 </div>
-                <canvas id="gameCanvas"></canvas>
+                <canvas id="gameCanvas" tabindex="1"></canvas>
                 <div class="game-controls">
                     <p>Use arrow keys to control the snake</p>
                     <button id="startButton" class="btn">Start Game</button>
@@ -76,6 +82,15 @@
         <p>&copy; 2024 SnakeVerse. All rights reserved.</p>
     </footer>
 
+    <script>
+        // Add this script to handle body class for preventing scroll
+        document.getElementById('startButton').addEventListener('click', function() {
+            document.body.classList.add('game-active');
+        });
+        document.getElementById('restartButton').addEventListener('click', function() {
+            document.body.classList.add('game-active');
+        });
+    </script>
     <script src="game.js"></script>
 </body>
 </html> 
