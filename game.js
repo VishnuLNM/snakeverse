@@ -20,6 +20,13 @@ let gameLoop = null;
 let gameStarted = false;
 let isGameOver = false;
 
+// Prevent arrow key scrolling globally
+window.addEventListener("keydown", function(e) {
+    if(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].indexOf(e.code) > -1) {
+        e.preventDefault();
+    }
+}, false);
+
 // Initialize game
 function initGame() {
     snake = [
@@ -177,12 +184,12 @@ function draw() {
 
 // Handle keyboard input
 function handleKeyPress(e) {
-    if (!gameStarted) return;
-    
-    // Prevent default scrolling behavior for arrow keys during gameplay
-    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+    // Always prevent default for arrow keys
+    if(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
         e.preventDefault();
     }
+
+    if (!gameStarted) return;
     
     switch(e.key) {
         case 'ArrowUp':
